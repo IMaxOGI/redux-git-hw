@@ -1,13 +1,10 @@
 /* eslint-disable import/no-anonymous-default-export */
-import { createStore, applyMiddleware } from "redux";
-import { composeWithDevTools } from "redux-devtools-extension";
-import thunk from "redux-thunk";
-import logger from "redux-logger";
-import rootReducer from "./reducers";
+import { configureStore } from "@reduxjs/toolkit";
+import rootReducer from "./rootReducers";
 
-export default function () {
-  return createStore(
-    rootReducer,
-    composeWithDevTools(applyMiddleware(thunk, logger))
-  );
-}
+export default () => {
+  return configureStore({
+    reducer: rootReducer,
+    devTools: true,
+  });
+};
