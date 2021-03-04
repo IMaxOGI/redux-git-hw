@@ -19,7 +19,8 @@ function GistFiles() {
     if (selectedGists) {
       dispatch(fetchFiles({ files: selectedGists.files, gistId }));
     }
-  }, [dispatch, gistId, selectedGists]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch, gistId]);
 
   const files = useSelector((state) => getFilesByGistId(state, gistId));
   const loading = useSelector(getFilesLoading);

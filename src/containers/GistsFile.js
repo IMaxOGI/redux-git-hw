@@ -17,7 +17,8 @@ function Gists() {
 
   useEffect(() => {
     dispatch(fetchGists());
-  }, [dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Container>
