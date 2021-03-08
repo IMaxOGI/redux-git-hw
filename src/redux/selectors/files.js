@@ -1,13 +1,14 @@
-import { createSelector } from "@reduxjs/toolkit";
+import { createSelector } from '@reduxjs/toolkit';
+
 
 export const getFiles = createSelector(
-  (state) => state.files.data,
-  (files) => files
+  state => state.files.data,
+  files => files
 );
 
 export const getFilesLoading = createSelector(
-  (state) => state.files.isFetching,
-  (isFetching) => isFetching
+  state => state.files.isFetching,
+  isFetching => isFetching,
 );
 
 export const getFilesByGistId = createSelector(

@@ -1,49 +1,40 @@
-import React, { useEffect } from "react";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { dark } from "react-syntax-highlighter/dist/esm/styles/prism";
-import { useParams, Redirect } from "react-router-dom";
+import React, { useEffect } from 'react';
+import { Container, Grid } from "semantic-ui-react";
+import { Route, Switch, useRouteMatch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Container } from "semantic-ui-react";
-import { fetchFiles } from "../redux/slices/filesSlice";
-import { getSelectedGistById } from "../redux/selectors/gists";
-import { getFilesByGistId, getFilesLoading } from "../redux/selectors/files";
-import LoadingOverlay from "./LoadingOverlay";
+import GistList from "../components/GistList";
+import { fetchGists } from "../redux/slices/gistsSlice";
+import GistFiles from "./GistFiles";
+import { getGistLoading, getGists } from "../redux/selectors/gists";
+import LoadingOverlay from "../../../class-works/cw2/life-cycle-example/components/LoadingOverlay";
 
-function GistFiles() {
-  const { gistId } = useParams();
-  const selectedGists = useSelector((state) =>
-    getSelectedGistById(state, gistId)
-  );
+function Gists() {
+  const { path } = useRouteMatch();
   const dispatch = useDispatch();
-  useEffect(() => {
-    if (selectedGists) {
-      dispatch(fetchFiles({ files: selectedGists.files, gistId }));
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch, gistId]);
+  const gists = useSelector(getGists);
+  const isFetching = useSelector(getGistLoading);
 
-  const files = useSelector((state) => getFilesByGistId(state, gistId));
-  const loading = useSelector(getFilesLoading);
-  if (!selectedGists) {
-    return <Redirect to="/gists" />;
-  }
+  useEffect(() => {
+    dispatch(fetchGists());
+  }, []);
+
   return (
     <Container>
-      <LoadingOverlay active={loading} />
-      <div className="gist-title">{selectedGists.owner.login}</div>
-      {files.map((file) => (
-        <div className="code-block">
-          <div className="code-block-title">{file.filename}</div>
-          <SyntaxHighlighter
-            language={file.language && file.language.toLowerCase()}
-            style={dark}
-          >
-            {file.fileContent}
-          </SyntaxHighlighter>
-        </div>
-      ))}
+      <LoadingOverlay active={isFetching} />
+      <Grid>
+        <Grid.Column width={7}>
+          <GistList gists={gists} />
+        </Grid.Column>
+        <Grid.Column width={9}>
+          <Switch>
+            <Route path={`${path}/:gistId`} exact>
+              <GistFiles />
+            </Route>
+          </Switch>
+        </Grid.Column>
+      </Grid>
     </Container>
   );
 }
 
-export default GistFiles;
+export default Gists;
