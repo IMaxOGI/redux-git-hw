@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import { Container, Grid } from "semantic-ui-react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,7 +6,7 @@ import GistList from "../components/GistList";
 import { fetchGists } from "../redux/slices/gistsSlice";
 import GistFiles from "./GistFiles";
 import { getGistLoading, getGists } from "../redux/selectors/gists";
-import LoadingOverlay from "../../../class-works/cw2/life-cycle-example/components/LoadingOverlay";
+import LoadingOverlay from "./LoadingOverlay";
 
 function Gists() {
   const { path } = useRouteMatch();
@@ -16,7 +16,7 @@ function Gists() {
 
   useEffect(() => {
     dispatch(fetchGists());
-  }, []);
+  }, [dispatch]);
 
   return (
     <Container>

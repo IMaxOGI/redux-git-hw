@@ -7,8 +7,8 @@ import {
   Switch,
   Link,
 } from "react-router-dom";
-// import Gists from "./containers/Gists";
-// import NotFoundPage from "../hw4/blog-v2/containers/404";
+import Gists from "./containers/Gists";
+import NotFoundPage from "./containers/404";
 
 export default function Routes() {
   return (
@@ -24,8 +24,8 @@ export default function Routes() {
             This is a gist explorer <Link to="/gists">click here</Link> to see
             gists
           </Route>
-          {/* <Route path="/gists" component={Gists} />
-          <Route path="*" component={NotFoundPage} /> */}
+          <Route path="/gists" component={Gists} />
+          <Route path="*" component={NotFoundPage} />
         </Switch>
       </Router>
     </Container>

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import "./GistsFile.css";
+import "./GistFile.css";
 import { Container, Grid } from "semantic-ui-react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,8 +17,7 @@ function Gists() {
 
   useEffect(() => {
     dispatch(fetchGists());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dispatch]);
 
   return (
     <Container>
