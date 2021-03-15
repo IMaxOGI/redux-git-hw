@@ -20,7 +20,7 @@ function GistFiles() {
     if (selectedGists) {
       dispatch(fetchFiles({ files: selectedGists.files, gistId }));
     }
-  }, [gistId, selectedGists]);
+  }, [dispatch, gistId, selectedGists]);
 
   const files = useSelector((state) => getFilesByGistId(state, gistId));
   const loading = useSelector(getFilesLoading);

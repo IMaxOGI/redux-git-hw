@@ -16,7 +16,7 @@ function Gists() {
 
   useEffect(() => {
     dispatch(fetchGists());
-  }, []);
+  }, [dispatch]);
 
   return (
     <Container>
