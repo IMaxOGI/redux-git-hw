@@ -1,4 +1,3 @@
-/* eslint-disable import/no-anonymous-default-export */
 import { configureStore } from "@reduxjs/toolkit";
 import rootReducer from "./rootReducer";
 
